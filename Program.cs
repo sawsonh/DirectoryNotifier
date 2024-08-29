@@ -9,28 +9,38 @@
             using (DirectoryNotifier notifier = new("/Users/sharati/Projects/"))
             {
                 PrintHelpMenu();
-                var running = true;
-                while (running)
+                try
                 {
-                    var input = Console.ReadKey(true).KeyChar;
-                    switch (input)
+                    var running = true;
+                    while (running)
                     {
-                        case 'a':
-                            AddConsumer(notifier);
-                            break;
-                        case 'd':
-                            RemoveConsumer();
-                            break;
-                        case 'h':
-                            PrintHelpMenu();
-                            break;
-                        case 'q':
-                            QuitProgram();
-                            running = false;
-                            break;
-                        default:
-                            Console.WriteLine("Invalid option. Press 'h' for help.");
-                            break;
+                        var input = Console.ReadKey(true).KeyChar;
+                        switch (input)
+                        {
+                            case 'a':
+                                AddConsumer(notifier);
+                                break;
+                            case 'd':
+                                RemoveConsumer();
+                                break;
+                            case 'h':
+                                PrintHelpMenu();
+                                break;
+                            case 'q':
+                                QuitProgram();
+                                running = false;
+                                break;
+                            default:
+                                Console.WriteLine("Invalid option. Press 'h' for help.");
+                                break;
+                        }
+                    }
+                }
+                finally
+                {
+                    if (consumers.Count > 0)
+                    {
+                        QuitProgram();
                     }
                 }
             }
